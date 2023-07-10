@@ -10,5 +10,5 @@ const nameRoute = require('./routes/name');
 connectToMongoDB();
 app.use('/',nameRoute);
 app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+  console.log('App running on port 3000');
 });

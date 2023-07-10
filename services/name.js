@@ -19,14 +19,12 @@ exports.saveName = async function(nameObject){
 exports.getName = async function(key){
     try{
         const result = await name.findOne({name : key});
-        console.log(result);
         if(result){
             return result;
         }
         return {};
     }
     catch (error) {
-        console.log(error);
         return {}
     }
 }
@@ -46,7 +44,6 @@ exports.searchName = async function(searchObject){
         return {};
     }
     catch (error) {
-        console.log(error);
         return {}
     }
 }
