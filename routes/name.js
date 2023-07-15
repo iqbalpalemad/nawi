@@ -20,9 +20,9 @@ async function getName(req,res){
 
 async function searchName(req,res){
     const names = await nameService.searchName({
-        muslim : req.body.muslim || false,
-        christian : req.body.christian || false,
-        hindu : req.body.hindu || false,
+        numberOfVowels : req.body.numberOfVowels || null,
+        numberOfRepeatingCharacter : req.body.numberOfRepeatingCharacter || null,
+        numberOfAdjacentCharacters : req.body.numberOfAdjacentCharacters || null,
         length : req.body.length || 0
     })
     res.status(200).json(names);

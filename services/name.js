@@ -25,30 +25,34 @@ exports.getName = async function(key){
     try{
         const result = await name.findOne({name : key});
         if(result){
-            return result;
+            return {result : true};
         }
-        return {};
+        return {result : false};
     }
     catch (error) {
-        return {}
+        return {result : true}
     }
 }
 
 
 exports.searchName = async function(searchObject){
+    const response = [];
     try{
         const result = await name.find({
-            ...(searchObject.muslim) && {muslim : searchObject.muslim},
-            ...(searchObject.christian) && {christian : searchObject.christian},
-            ...(searchObject.hindu) && {hindu : searchObject.hindu},
+            ...(searchObject.numberOfVowels) && {numberOfVowels : searchObject.numberOfVowels},
+            ...(searchObject.numberOfRepeatingCharacter) && {numberOfRepeatingCharacter : searchObject.numberOfRepeatingCharacter},
+            ...(searchObject.numberOfAdjacentCharacters) && {numberOfAdjacentCharacters : searchObject.numberOfAdjacentCharacters},
             length : searchObject.length
         });
         if(result){
-            return result;
+            for(let name of result){
+                if(name.name){
+                    response.push(name.name);
+                }
+            }
         }
-        return {};
     }
     catch (error) {
-        return {}
     }
+    return response;
 }
