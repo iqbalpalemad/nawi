@@ -5,17 +5,14 @@ const nameSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    muslim : {
-        type : Boolean ,
-        default : false
+    numberOfVowels : {
+        type : Number
     },
-    christian : {
-        type : Boolean ,
-        default : false
+    numberOfRepeatingCharacter : {
+        type : Number
     },
-    hindu : {
-        type : Boolean ,
-        default : false
+    numberOfAdjacentCharacters : {
+        type : Number
     },
     length : {
         type : Number

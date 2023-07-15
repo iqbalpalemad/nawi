@@ -1,16 +1,21 @@
 const mongoose = require('mongoose');
 const name = require('../models/name');
+const functions = require('../utils/functions');
 
 exports.saveName = async function(nameObject){
-    const newName = new name({
-        name : nameObject.name.toLowerCase(),
-        ...(nameObject.muslim) && {muslim: nameObject.muslim },
-        ...(nameObject.christian) && {christian : nameObject.christian },
-        ...(nameObject.hindu) && {hindu : nameObject.hindu },
-        length : nameObject.name.length
-    })
+    const nameArray = nameObject.name.split(',');
+    const names = [];
+    for(let name of nameArray){
+        names.push({
+            name : name.toLowerCase(),
+            length : name.length,
+            numberOfVowels : functions.countVowels(name),
+            numberOfRepeatingCharacter : functions.countRepeatingLetters(name),
+            numberOfAdjacentCharacters : functions.countAdjacentRepeatingLetters(name)
+        })
+    }
     try{
-        await newName.save();
+        const result = await name.insertMany(names,{ordered: false,writeConcern: { w: "majority" }});
     } catch (error) {
         console.error('Error saving user:', error);
     }
