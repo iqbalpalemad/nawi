@@ -26,14 +26,12 @@ exports.getName = async function(key){
         const result = await name.findOne({name : key.trim()});
         if(result){
             return {result : true};
-        }
-        return {result : false};
+        }   
     }
     catch (error) {
-        return {result : true}
     }
+    return {result : false};
 }
-
 
 exports.searchName = async function(searchObject){
     const response = [];
@@ -55,4 +53,18 @@ exports.searchName = async function(searchObject){
     catch (error) {
     }
     return response;
+}
+
+exports.getRandomName = async function(){
+    try {
+        const count = await name.countDocuments().exec();
+        const random = Math.floor(Math.random() * count);
+        const document = await name.findOne().skip(random).exec();
+        if(document && document.name){
+            return {result : true,name : document.name};
+        }
+      } catch (err) {
+        console.error(err);
+      }
+      return {result : false};
 }

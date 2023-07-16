@@ -6,6 +6,7 @@ const nameService = require('../services/name');
 router.post('/save',saveName);
 router.get('/get/:name',getName);
 router.post('/search',searchName);
+router.get('/random',getRandomName);
 
 
 async function saveName(req,res){
@@ -26,6 +27,11 @@ async function searchName(req,res){
         length : req.body.length || 0
     })
     res.status(200).json({result : true, names : names});
+}
+
+async function getRandomName(req,res){
+    const name = await nameService.getRandomName();
+    res.status(200).json(name);
 }
 
 module.exports = router;
