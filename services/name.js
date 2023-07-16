@@ -16,8 +16,10 @@ exports.saveName = async function(nameObject){
     }
     try{
         const result = await name.insertMany(names,{ordered: false,writeConcern: { w: "majority" }});
+        return result;
     } catch (error) {
         console.error('Error saving user:', error);
+        return {};
     }
 }
 
