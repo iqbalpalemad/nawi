@@ -7,7 +7,7 @@ exports.saveName = async function(nameObject){
     const names = [];
     for(let name of nameArray){
         names.push({
-            name : name.toLowerCase(),
+            name : name.toLowerCase().trim(),
             length : name.length,
             numberOfVowels : functions.countVowels(name),
             numberOfRepeatingCharacter : functions.countRepeatingLetters(name),
@@ -23,7 +23,7 @@ exports.saveName = async function(nameObject){
 
 exports.getName = async function(key){
     try{
-        const result = await name.findOne({name : key});
+        const result = await name.findOne({name : key.trim()});
         if(result){
             return {result : true};
         }
