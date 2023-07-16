@@ -25,7 +25,7 @@ async function searchName(req,res){
         numberOfAdjacentCharacters : req.body.numberOfAdjacentCharacters || null,
         length : req.body.length || 0
     })
-    res.status(200).json(names);
+    res.status(200).json({result : true, names : names});
 }
 
 module.exports = router;
