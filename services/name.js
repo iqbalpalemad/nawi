@@ -43,7 +43,7 @@ exports.searchName = async function(searchObject){
             ...(searchObject.numberOfRepeatingCharacter) && {numberOfRepeatingCharacter : searchObject.numberOfRepeatingCharacter},
             ...(searchObject.numberOfAdjacentCharacters) && {numberOfAdjacentCharacters : searchObject.numberOfAdjacentCharacters},
             length : searchObject.length
-        });
+        }).sort({name : 1});
         if(result){
             for(let name of result){
                 if(name.name){
