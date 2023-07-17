@@ -63,7 +63,13 @@ exports.getRandomName = async function(){
         const random = Math.floor(Math.random() * count);
         const document = await name.findOne().skip(random).exec();
         if(document && document.name){
-            return {result : true,name : document.name};
+            return { result : true,
+                     name : document.name,
+                     numberOfVowels : document.numberOfVowels,
+                     numberOfRepeatingCharacter : document.numberOfRepeatingCharacter,
+                     numberOfAdjacentCharacters : document.numberOfAdjacentCharacters,
+                     length : document.length
+                    };
         }
       } catch (err) {
         console.error(err);
