@@ -7,7 +7,7 @@ router.post('/save',saveName);
 router.get('/get/:name',getName);
 router.post('/search',searchName);
 router.get('/random',getRandomName);
-
+router.get('/health',healthStatus);
 
 async function saveName(req,res){
     const save = await nameService.saveName(req.body)
@@ -34,4 +34,7 @@ async function getRandomName(req,res){
     res.status(200).json(name);
 }
 
+async function healthStatus(req,res){
+    res.status(200).json({result : true});
+}
 module.exports = router;
