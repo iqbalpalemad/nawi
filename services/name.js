@@ -39,9 +39,9 @@ exports.searchName = async function(searchObject){
     const response = [];
     try{
         const result = await name.find({
-            ...(searchObject.numberOfVowels) && {numberOfVowels : searchObject.numberOfVowels},
-            ...(searchObject.numberOfRepeatingCharacter) && {numberOfRepeatingCharacter : searchObject.numberOfRepeatingCharacter},
-            ...(searchObject.numberOfAdjacentCharacters) && {numberOfAdjacentCharacters : searchObject.numberOfAdjacentCharacters},
+            numberOfVowels : searchObject.numberOfVowels,
+            numberOfRepeatingCharacter : searchObject.numberOfRepeatingCharacter,
+            numberOfAdjacentCharacters : searchObject.numberOfAdjacentCharacters,
             length : searchObject.length
         }).sort({name : 1});
         if(result){

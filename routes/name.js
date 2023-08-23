@@ -21,9 +21,9 @@ async function getName(req,res){
 
 async function searchName(req,res){
     const names = await nameService.searchName({
-        numberOfVowels : req.body.numberOfVowels || null,
-        numberOfRepeatingCharacter : req.body.numberOfRepeatingCharacter || null,
-        numberOfAdjacentCharacters : req.body.numberOfAdjacentCharacters || null,
+        numberOfVowels : req.body.numberOfVowels || 0,
+        numberOfRepeatingCharacter : req.body.numberOfRepeatingCharacter || 0,
+        numberOfAdjacentCharacters : req.body.numberOfAdjacentCharacters || 0,
         length : req.body.length || 0
     })
     res.status(200).json({result : true, names : names});
