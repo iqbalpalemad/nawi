@@ -38,12 +38,13 @@ exports.getName = async function(key){
 exports.searchName = async function(searchObject){
     const response = [];
     try{
-        const result = await name.find({
-            numberOfVowels : searchObject.numberOfVowels,
-            numberOfRepeatingCharacter : searchObject.numberOfRepeatingCharacter,
-            numberOfAdjacentCharacters : searchObject.numberOfAdjacentCharacters,
+        const searchCondition = {
+            ...(searchObject.numberOfVowels > -1 && {numberOfVowels : searchObject.numberOfVowels}),
+            ...(searchObject.numberOfRepeatingCharacter > -1 && {numberOfRepeatingCharacter : searchObject.numberOfRepeatingCharacter}),
+            ...(searchObject.numberOfAdjacentCharacters > -1 && {numberOfAdjacentCharacters : searchObject.numberOfAdjacentCharacters}),
             length : searchObject.length
-        }).sort({name : 1});
+        };
+        const result = await name.find(searchCondition).sort({name : 1});
         if(result){
             for(let name of result){
                 if(name.name){
@@ -53,6 +54,7 @@ exports.searchName = async function(searchObject){
         }
     }
     catch (error) {
+        console.log(error)
     }
     return response;
 }
