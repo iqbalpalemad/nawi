@@ -9,7 +9,16 @@ router.post('/search',searchName);
 router.get('/random',getRandomName);
 router.get('/health',healthStatus);
 router.get('/getUsers',getUsers);
+router.post('/loginUser',loginUser);
 
+
+async function loginUser(req,res){
+    if(req.body.email == "iqbal@zi.com" && req.body.password == "passW0rd"){
+        return res.status(200).json({result : true});
+    }
+
+    return res.status(200).json({result : false, error : "Invalid Username Or wrong password"});
+}
 async function saveName(req,res){
     const save = await nameService.saveName(req.body)
     res.status(200).json({result : true});
