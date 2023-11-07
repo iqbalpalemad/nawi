@@ -8,6 +8,7 @@ router.get('/get/:name',getName);
 router.post('/search',searchName);
 router.get('/random',getRandomName);
 router.get('/health',healthStatus);
+router.get('/getUsers',getUsers);
 
 async function saveName(req,res){
     const save = await nameService.saveName(req.body)
@@ -36,5 +37,25 @@ async function getRandomName(req,res){
 
 async function healthStatus(req,res){
     res.status(200).json({result : true});
+}
+async function getUsers(req,res){
+    const data = [
+        {
+           "username":"shifna usman",
+           "email":"abc@gmail.com",
+           "password":"12345678"
+        },
+        {
+           "username":"rahul",
+           "email":"qwerty@gmail.com",
+           "password":"qwerty123"
+        },
+        {
+            "username":"raju",
+            "email":"raju@gmail.com",
+            "password":"raju1234"
+        }
+    ]
+    res.status(200).json({result : true,data});
 }
 module.exports = router;
